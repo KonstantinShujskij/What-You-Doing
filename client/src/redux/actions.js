@@ -1,4 +1,4 @@
-import { CONCAT_ACTIONS, SET_ACTIONS, CLEAR_ACTIONS, CREATE_ACTION } from "./types";
+import { CONCAT_ACTIONS, SET_ACTIONS, CLEAR_ACTIONS, CREATE_ACTION, EDIT_ACTION_STATUS } from "./types";
 
 export function setActions(actions) {
     return {
@@ -24,5 +24,12 @@ export function createAction(action) {
     return {
         type: CREATE_ACTION,
         payload: action
+    }
+}
+
+export function editActionStatus(status, id) {
+    return {
+        type: EDIT_ACTION_STATUS,
+        payload: { status, id }
     }
 }

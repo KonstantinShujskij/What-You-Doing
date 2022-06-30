@@ -8,6 +8,7 @@ import Loader from './components/Loader';
 import useRoutes from './routes';
 import Navbar from './components/Navbar';
 
+
 function App() {
   const auth = useAuth();
   const isAuthenticated = !!auth.token;
@@ -23,8 +24,7 @@ function App() {
             <div className="container">
               {routes}
             </div>
-          </>
-          
+          </>          
         </AuthContext.Provider>  
       </BrowserRouter>
   );

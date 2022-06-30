@@ -1,5 +1,10 @@
 {
     "port": 5000,
     "jwtSecret": "NHrmJipPAavz6Juw",
-    "mongoUri": "mongodb+srv://root:UHD6FFL7Ehmw464Z@cluster0.xaro4.mongodb.net/WHATYOUDOING?retryWrites=true&w=majority"
+    "mongoUri": "mongodb+srv://root:UHD6FFL7Ehmw464Z@cluster0.xaro4.mongodb.net/WHATYOUDOING?retryWrites=true&w=majority",
+    "constants": {
+        "public": "PUBLIC",
+        "protected": "PROTECTED",
+        "private": "PRIVATE"
+    }
 }

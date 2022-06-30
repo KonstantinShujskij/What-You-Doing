@@ -8,8 +8,9 @@ function getTime() {
 const schema = new Schema({
     title: {type: String, required: true},
     description: {type: String},
-    labels: [{type: String}],
-    time: {type: Number, default: getTime},
+    feel: {type: String},
+    status: {type: String},
+    time: {type: Number, default: getTime()},
     owner: {type: Types.ObjectId, ref: 'User'}
 });
 

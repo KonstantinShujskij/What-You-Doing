@@ -1,54 +1,40 @@
-import React, { useContext, useEffect } from "react"; 
+import React, { useRef } from "react"; 
 import { useDispatch, useSelector } from "react-redux";
 import { Ask } from "../components/Ask";
 import { List } from "../components/List";
-import AuthContext from "../context/AuthContext";
-import { formatDate } from "../function";
-import useHttp from "../hooks/http.hook";
-import useLoad from "../hooks/load.hook";
-import {setActions} from "../redux/actions";
+import useActions from "../hooks/actions.hook";
+import useScroll from "../hooks/scroll.hook";
+import { concatActions } from "../redux/actions";
+import Loader from "../components/Loader"
 
 export default function MainPage() {
-    const {token, isAuthenticated} = useContext(AuthContext);
-    const {isLoad, load} = useLoad();
-    const {request} = useHttp();
+    const { loadActions, loading } = useActions()
     const dispatch = useDispatch();
 
     const list = useSelector((state) => state.list.actions);
 
-    useEffect(() => {
-        if(isAuthenticated) {
-          if(isLoad === false) {
-            try {
-              const now = new Date();
-              request('/api/action/load', 'POST', {time: now.getTime(), interval: 1000 * 60 * 60 * 1000}, {
-                Authorization: `Bearer ${token}`
-              }).then((data) => {
-                load();
+    const parentRef = useRef();
+    const childrenRef = useRef();
+    const { on } = useScroll(parentRef, childrenRef, () => load());
 
-                const actions = data.actions.reverse().map((action) => {
-                    const date = formatDate(new Date(action.time));
+    const load = () => {
+      const skip = list.length
+      const limit = 3
 
-                    return {
-                        title: action.title,
-                        description: action.description,
-                        categories: [],
-                        id: action._id,
-                        time: date
-                    };
-                });
-                
-                dispatch(setActions(actions));
-              });
-            } catch (e) {}
-          }
-        }
-    }, [isAuthenticated, isLoad, load, request, token, dispatch]);
+      loadActions(skip, limit).then((actions) => {
+        if(actions.length === 0) { return }
+
+        dispatch(concatActions(actions))
+        on()
+      })
+    }
     
     return (
-        <div className="wrap">
+        <div className="wrap" ref={parentRef}>
             <Ask />
             <List list={list}/>
+            {(loading && <Loader /> )}
+            <div ref={childrenRef} style={{height: 20, background: '#00000000'}} />
         </div>        
     );
 }

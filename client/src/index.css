@@ -21,6 +21,8 @@ code {
 .wrap {
     width: 720px;
     margin: 0 auto;
+    height: calc(100vh - 49px);
+    overflow-y: auto;
 }
 
 .action {
@@ -64,7 +66,7 @@ code {
 
 .action__body {
     padding: 24px 0;
-    min-height: 68px;
+    min-height: 88px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -113,7 +115,7 @@ code {
     background-color: #2cb67d;
 }
 
-.ask .action__time {
+.ask .action__time{
     font-size: 48px;
     background-color: #2cb67d;
     border-color: #16161a;
@@ -131,6 +133,13 @@ code {
 
 .ask .action__title {
     color: #2cb67d;
+}
+
+.month .action__time {
+    background-color: #2cb67d;
+    border-color: #16161a;
+    color: #16161a;
+    font-weight: bold;
 }
 
 .input {
@@ -210,4 +219,91 @@ code {
 
 .logout-btn:hover {
     color: #2cb67d;
+}
+
+.input {
+    color: #fffffe;
+}
+
+
+.status {
+    padding: 0 4px;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    width: 116px;
+    position: relative;
+    border: 1px solid #2cb67d;
+    border-radius: 14px / 18px;
+    overflow: hidden;
+    font-size: 14px;
+}
+
+.status__item {
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    color: #2cb67d;
+    position: relative;
+    z-index: 2;
+}
+
+.status__item:hover {
+    color: #fffffe;
+}
+
+.status .status__item:first-child {
+    margin-left: 0;
+}
+
+.status .status__item:last-child {
+    margin-right: 0;
+}
+
+.status::before {
+    content: '';
+    position: absolute;
+    background-color: #2cb67d;
+    width: 44px;
+    height: 36px;
+    border-radius: 14px / 18px;
+    z-index: 1;    
+    transition: all 0.5s ease;
+}
+
+.status_public::before {
+    transform: translateX(-36px); 
+}
+
+.status_protected::before {
+    transform: translateX(0); 
+}
+
+.status_private::before {
+    transform: translateX(36px); 
+}
+
+.status_public .status__public {
+    color: #fffffe;   
+}
+
+.status_protected .status__protected {
+    color: #fffffe;   
+}
+
+.status_private .status__private {
+    color: #fffffe;   
+}
+
+
+.action .status {
+    margin-bottom: auto;
+    margin-top: 28px;
+    margin-left: auto;
 }

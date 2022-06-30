@@ -42,6 +42,7 @@ export default function AuthPage() {
                                 <div>
                                     <div className="input-field">
                                         <input 
+                                        className="input"
                                             placeholder="Input e-mail" 
                                             id="name" 
                                             type="text"
@@ -52,6 +53,7 @@ export default function AuthPage() {
                                     </div>
                                     <div className="input-field">
                                         <input 
+                                            className="input"
                                             placeholder="Input password" 
                                             id="password" 
                                             type="password"
